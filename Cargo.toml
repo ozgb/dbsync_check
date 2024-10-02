@@ -1,0 +1,10 @@
+[package]
+name = "dbsync_check"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+blockfrost = "1.0.1"
+clap = { version = "4.5.19", features = ["derive", "env"] }
+tokio = { version = "1", features = ["full"] }
+sqlx = { version = "0.8", features = [ "runtime-tokio", "postgres", "bigdecimal" ] }

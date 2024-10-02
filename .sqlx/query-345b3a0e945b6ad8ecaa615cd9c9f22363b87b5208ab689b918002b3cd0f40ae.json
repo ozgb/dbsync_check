@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT ph.view as pool_hash, CAST(SUM(es.amount) as text) as \"stake!: String\"\n        FROM epoch_stake es\n        INNER JOIN pool_hash ph ON es.pool_id = ph.id\n        WHERE es.epoch_no = $1\n        GROUP BY ph.view\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "pool_hash",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "stake!: String",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      null
+    ]
+  },
+  "hash": "345b3a0e945b6ad8ecaa615cd9c9f22363b87b5208ab689b918002b3cd0f40ae"
+}

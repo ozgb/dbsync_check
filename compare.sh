@@ -7,7 +7,7 @@ START_EPOCH=694
 END_EPOCH=708
 
 # Initialize the table with headers
-printf "| Epoch | db-sync 13.3.0.0 | db-sync 13.5.0.0 |\n"
+printf "| Epoch | db-sync 13.3.0.0 | db-sync 13.5.0.2 |\n"
 printf "|-------|------------------|------------------|\n"
 
 # Loop through each epoch

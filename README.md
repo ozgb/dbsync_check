@@ -1,7 +1,7 @@
 # db-sync comparison with Blockfrost - Stake Distribution diff
 
 Output of `compare.sh`:
-| Epoch | db-sync 13.3.0.0 | db-sync 13.5.0.0 |
+| Epoch | db-sync 13.3.0.0 | db-sync 13.5.0.2 |
 |-------|------------------|------------------|
 | 694   | Diff             | -                |
 | 695   | Diff             | -                |

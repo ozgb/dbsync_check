@@ -55,7 +55,7 @@ fn build_api(project_id: &str) -> BlockfrostResult<BlockfrostAPI> {
 }
 
 async fn read_blockfrost_epoch(api: &BlockfrostAPI, epoch: i32) -> BlockfrostResult<PoolStake> {
-    let pagination = Pagination::default();
+    let pagination = Pagination::all();
 
     let epochs_stakes = api.epochs_stakes(epoch, pagination).await?;
 

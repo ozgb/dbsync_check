@@ -55,9 +55,21 @@ fn build_api(project_id: &str) -> BlockfrostResult<BlockfrostAPI> {
 }
 
 async fn read_blockfrost_epoch(api: &BlockfrostAPI, epoch: i32) -> BlockfrostResult<PoolStake> {
-    let pagination = Pagination::all();
+    log::debug!("Epoch: {}", epoch);
+    let mut page = 1;
+    let mut epochs_stakes = Vec::new();
+    loop {
+        let pagination = Pagination { page, ..Default::default() };
+        let new_stakes = api.epochs_stakes(epoch, pagination).await?;
+        let new_stakes_len = new_stakes.len();
+        epochs_stakes.extend(new_stakes);
+        if new_stakes_len < pagination.count {
+            break;
+        }
+        page += 1;
+    }
 
-    let epochs_stakes = api.epochs_stakes(epoch, pagination).await?;
+    log::info!("Stakes: {}", epochs_stakes.len());
 
     let mut map = HashMap::new();
     for stake in epochs_stakes.iter() {
@@ -119,6 +131,7 @@ fn write_csv(prefix: &str, epoch: i32, map: PoolStake) -> BlockfrostResult<()> {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Cli::parse();
+    env_logger::init();
     match args.command {
         Commands::Blockfrost {
             blockfrost_project_id,
